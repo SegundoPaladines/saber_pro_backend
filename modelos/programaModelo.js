@@ -1,7 +1,8 @@
 import { Sequelize } from "sequelize";
-import { db } from "../database/conexion.js"; 
+import { db } from "../database/conexion.js";
+import { facultades } from "./facultadModelo.js";
 
-const facultades = db.define('facultades', {
+const programas = db.define('programas', {
     pk:{
         type:Sequelize.INTEGER,
         allowNull:false,
@@ -15,7 +16,13 @@ const facultades = db.define('facultades', {
     logo:{
         type:Sequelize.STRING,
         allowNull:true
+    },
+    facultad:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
     }
 });
 
-export { facultades };
+programas.belongsTo(facultades, {foreignKey:'facultad'});
+
+export { programas };

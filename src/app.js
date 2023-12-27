@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { facultadesRouter } from "../rutas/facultadesRouter.js";
+import { programasRouter } from "../rutas/programasRouter.js";
 
 import { db } from "../database/conexion.js";
 
@@ -20,6 +21,8 @@ db.authenticate().then(()=>{
 app.get("/", (req, res) => {res.send("Hola Desde Backend MySQL");});
 
 app.use('/facultades', facultadesRouter);
+
+app.use('/programas', programasRouter);
 
 db.sync().then(() => {
     app.listen(PORT, ()=>{
