@@ -10,6 +10,24 @@ const listarProgramas = (req, res ) => {
     return;
 }
 
+const buscarProgramaFac= (req, res) => {
+    const id = parseInt(req.params.id);
+
+    if(id == null){
+        res.status(400).json({type:"error", mensaje:"El id es requerido"});
+
+        return;
+    }
+
+    programas.findAll({where:{facultad:id}}).then((r) => {
+        res.status(200).json(r);
+    }).catch((e) => {
+        res.status(500).json({type:"error", mensaje:"No se a podido encontrar el registro "+e});
+    });
+
+    return;
+}
+
 const buscarPrograma= (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -115,4 +133,4 @@ const actualizarPrograma = (req, res) => {
     return;
 }
 
-export { listarProgramas, buscarPrograma, crearPrograma, eliminarPrograama, actualizarPrograma };
+export { listarProgramas, buscarProgramaFac, buscarPrograma, crearPrograma, eliminarPrograama, actualizarPrograma };

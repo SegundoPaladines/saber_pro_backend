@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import { estudiantes } from "../modelos/estudianteModelo.js";
 
 const listarEstudiantes = (req, res ) => {
@@ -5,6 +6,24 @@ const listarEstudiantes = (req, res ) => {
         res.status(200).json(r);
     }).catch((e)=>{
         res.status(500).json({type:"error", mensaje:"No se a podido encontrar ningun registro "+e});
+    });
+
+    return;
+}
+
+const buscarEstudianteProg = (req, res) => {
+    const id = parseInt(req.params.id);
+
+    if(id == null){
+        res.status(400).json({type:"error", mensaje:"El id es requerido"});
+
+        return;
+    }
+
+    estudiantes.findAll({where:{programaPK:id}}).then((r) => {
+        res.status(200).json(r);
+    }).catch((e) => {
+        res.status(500).json({type:"error", mensaje:"No se a podido encontrar el registro "+e});
     });
 
     return;
@@ -115,4 +134,4 @@ const actualizarEstudiante = (req, res) => {
     return;
 }
 
-export { listarEstudiantes, buscarEstudiante, crearEstudiante, eliminarEstudiante, actualizarEstudiante };
+export { listarEstudiantes, buscarEstudianteProg ,buscarEstudiante, crearEstudiante, eliminarEstudiante, actualizarEstudiante };

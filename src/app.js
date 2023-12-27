@@ -3,6 +3,7 @@ import cors from "cors";
 import { facultadesRouter } from "../rutas/facultadesRouter.js";
 import { programasRouter } from "../rutas/programasRouter.js";
 import { estudiantesRouter } from "../rutas/estudiantesRouter.js";
+import { saberOnceRouter } from "../rutas/saberOnceRouter.js";
 
 import { db } from "../database/conexion.js";
 
@@ -26,6 +27,7 @@ app.use('/facultades', facultadesRouter);
 app.use('/programas', programasRouter);
 
 app.use('/estudiantes', estudiantesRouter);
+app.use('/saber/once', saberOnceRouter);
 
 db.sync().then(() => {
     app.listen(PORT, ()=>{

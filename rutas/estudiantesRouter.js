@@ -1,5 +1,5 @@
 import express from "express";
-import { actualizarEstudiante, buscarEstudiante, crearEstudiante, eliminarEstudiante, listarEstudiantes } from "../controladores/estudianteControlador.js";
+import { actualizarEstudiante, buscarEstudiante, buscarEstudianteProg, crearEstudiante, eliminarEstudiante, listarEstudiantes } from "../controladores/estudianteControlador.js";
 
 const estudiantesRouter = express.Router();
 
@@ -9,7 +9,9 @@ estudiantesRouter.get('/', (req, res) => {
 estudiantesRouter.get('/buscar/:id', (req, res) => {
     buscarEstudiante(req, res);
 });
-
+estudiantesRouter.get('/buscar/programa/:id', (req, res) => {
+    buscarEstudianteProg(req, res);
+});
 estudiantesRouter.post('/crear', (req, res) => {
     crearEstudiante(req, res);
 });
