@@ -1,7 +1,7 @@
-import { programas } from "../modelos/programaModelo.js";
+import { estudiantes } from "../modelos/estudianteModelo.js";
 
-const listarProgramas = (req, res ) => {
-    programas.findAll().then((r) => {
+const listarEstudiantes = (req, res ) => {
+    estudiantes.findAll().then((r) => {
         res.status(200).json(r);
     }).catch((e)=>{
         res.status(500).json({type:"error", mensaje:"No se a podido encontrar ningun registro "+e});
@@ -10,7 +10,7 @@ const listarProgramas = (req, res ) => {
     return;
 }
 
-const buscarPrograma= (req, res) => {
+const buscarEstudiante= (req, res) => {
     const id = parseInt(req.params.id);
 
     if(id == null){
@@ -19,7 +19,7 @@ const buscarPrograma= (req, res) => {
         return;
     }
 
-    programas.findByPk(id).then((r) => {
+    estudiantes.findByPk(id).then((r) => {
         res.status(200).json(r);
     }).catch((e) => {
         res.status(500).json({type:"error", mensaje:"No se a podido encontrar el registro "+e});
@@ -28,41 +28,41 @@ const buscarPrograma= (req, res) => {
     return;
 }
 
-const crearPrograma = (req, res) => {
+const crearEstudiante = (req, res) => {
     if(!req.body.nombre){
         res.status(400).json({type:"error", mensaje:"El campo nombre es requerido"});
 
         return;
     }
 
-    if(!req.body.facultad){
-        res.status(400).json({type:"error", mensaje:"El campo facultad es requerido"});
+    if(!req.body.programaPK){
+        res.status(400).json({type:"error", mensaje:"El campo programa es requerido"});
 
         return;
     }
 
     const dataset = {
         nombre:req.body.nombre,
-        logo:req.body.logo,
-        facultad:req.body.facultad
+        foto:req.body.foto,
+        programaPK:req.body.programaPK
     }
 
-    programas.create(dataset).then((r) => {
+    estudiantes.create(dataset).then((r) => {
         res.status(200).json({
             type:'success',
-            mensaje: "Programa registrado con exito"
+            mensaje: "Estudiante registrado con exito"
         });
     }).catch((e)=>{
         res.status(500).json({
             type:'error',
-            mensaje: "No se ha podido registrar el programa "+e}
+            mensaje: "No se ha podido registrar al estudiante "+e}
         );
     });
 
     return;
 }
 
-const eliminarPrograama = (req, res) => {
+const eliminarEstudiante = (req, res) => {
     const id = parseInt(req.params.id);
 
     if(id == null){
@@ -71,10 +71,10 @@ const eliminarPrograama = (req, res) => {
         return;
     }
 
-    programas.destroy(
+    estudiantes.destroy(
         { where: {pk:id} }
     ).then((r) => {
-        res.status(200).json({type:'success', mensaje: "Programa eliminado exitosamente"});
+        res.status(200).json({type:'success', mensaje: "Estudiante eliminado exitosamente"});
     }).catch((e) => {
         res.status(500).json({type:'error', mensaje: "No se ha podido eliminar el registro "+e});
     });
@@ -82,7 +82,7 @@ const eliminarPrograama = (req, res) => {
     return;
 }
 
-const actualizarPrograma = (req, res) => {
+const actualizarEstudiante = (req, res) => {
     const id = parseInt(req.params.id);
 
     if(id == null){
@@ -91,23 +91,23 @@ const actualizarPrograma = (req, res) => {
         return;
     }
 
-    if(!req.body.nombre && !req.body.logo && !req.body.facultad){
+    if(!req.body.nombre && !req.body.foto && !req.body.programaPK){
         res.status(400).json({type:"error", mensaje:"Ningun campo para actualizar"});
 
         return;
     }
 
     const nombre = req.body.nombre;
-    const logo = req.body.logo;
-    const facultad = req.body.facultad;
+    const foto = req.body.foto;
+    const programaPK = req.body.programaPK;
 
-    programas.update({
+    estudiantes.update({
         nombre:nombre,
-        logo:logo,
-        facultad:facultad
+        foto:foto,
+        programaPK:programaPK
     },{where:{pk:id}}
     ).then((r) => {
-        res.status(200).json({type:'success', mensaje: "Programa actualizado exitosamente"});
+        res.status(200).json({type:'success', mensaje: "Estudiante actualizado exitosamente"});
     }).catch((e) => {
         res.status(500).json({type:'error', mensaje: "No se ha podido actualizar el registro "+e});
     });
@@ -115,4 +115,4 @@ const actualizarPrograma = (req, res) => {
     return;
 }
 
-export { listarProgramas, buscarPrograma, crearPrograma, eliminarPrograama, actualizarPrograma };
+export { listarEstudiantes, buscarEstudiante, crearEstudiante, eliminarEstudiante, actualizarEstudiante };

@@ -1,4 +1,4 @@
-import { facultades } from "../modelos/facultadModelo.js"
+import { facultades } from "../modelos/facultadModelo.js";
 
 const listarFacultades = (req, res ) => {
     facultades.findAll().then((r) => {
@@ -42,12 +42,12 @@ const crearFacultad = (req, res) => {
 
     facultades.create(dataset).then((r) => {
         res.status(200).json({
-            tipo:'success',
+            type:'success',
             mensaje: "Facultad registrada con exito"
         });
     }).catch((e)=>{
         res.status(500).json({
-            tipo:'error',
+            type:'error',
             mensaje: "No se ha podido registrar la  facultad "+e}
         );
     });
@@ -67,9 +67,9 @@ const eliminarFacultad = (req, res) => {
     facultades.destroy(
         { where: {pk:id} }
     ).then((r) => {
-        res.status(200).json({tipo:'success', mensaje: "Facultad eliminada exitosamente"});
+        res.status(200).json({type:'success', mensaje: "Facultad eliminada exitosamente"});
     }).catch((e) => {
-        res.status(500).json({tipo:'error', mensaje: "No se ha podido eliminar el registro "+e});
+        res.status(500).json({type:'error', mensaje: "No se ha podido eliminar el registro "+e});
     });
 
     return;
@@ -98,9 +98,9 @@ const actualizarFacultad = (req, res) => {
         logo:logo
     },{where:{pk:id}}
     ).then((r) => {
-        res.status(200).json({tipo:'success', mensaje: "Facultad actualizada exitosamente"});
+        res.status(200).json({type:'success', mensaje: "Facultad actualizada exitosamente"});
     }).catch((e) => {
-        res.status(500).json({tipo:'error', mensaje: "No se ha podido actualizar el registro "+e});
+        res.status(500).json({type:'error', mensaje: "No se ha podido actualizar el registro "+e});
     });
 
     return;
