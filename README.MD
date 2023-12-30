@@ -1,7 +1,6 @@
 # Node Con Express
 Taller Resultados de aprendizaje electiva UX 
 
-# La empresa se llama TUMASCOTA
 Como el git ingore evita se suban los node_mudules, debes ejecutar los siguiente comandos para que funcione una vez clonado el repositorio:
 
 ## Instalar Los Módulos Necesarios
